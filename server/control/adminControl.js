@@ -11,4 +11,19 @@ const viewuser = async (req, res) => {
 }
 
 
-module.exports = { viewuser }
+const deleteUser = async (req, res) => {
+    try {
+        const id = req.headers.userid
+        console.log(id)
+        await User.findByIdAndDelete({ _id: id })
+        res.json("User Deleted Successfully")
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
+
+
+
+module.exports = { viewuser, deleteUser }

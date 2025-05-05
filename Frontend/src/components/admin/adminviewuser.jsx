@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 import AXIOS from 'axios'
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import AdminNavbar from './adminnavbar';
 
 
-function AdminViewUser() {
+export default function Adminviewuser() {
     const [user, setUser] = useState([])
     useEffect(() => {
-        AXIOS.get("http://localhost:9000/api/admin/adminviewuser")
+        AXIOS.get("http://localhost:9000/api/admin/adminviewusers")
             .then((res) => {
                 console.log(res.data)
                 setUser(res.data)
@@ -14,9 +17,18 @@ function AdminViewUser() {
             })
     }, [])
 
-
+    const deleteUser = (id) => {
+        console.log("userId", id)
+        AXIOS.delete("http://localhost:9000/api/admin/userdelete", { headers: { userid: id } })
+            .then((res) => {
+                alert(res.data)
+            }).catch((err) => {
+                alert(err)
+            })
+    }
     return (
         <>
+            <AdminNavbar />
             <h1>Users</h1>
             <Table striped bordered hover>
                 <thead>
@@ -34,7 +46,7 @@ function AdminViewUser() {
                                 <td>{index + 1}</td>
                                 <td>{customer.Username}</td>
                                 <td>{customer.Email}</td>
-                                <td><Button variant="danger">Delete</Button></td>
+                                <td><Button variant="danger" onClick={() => deleteUser(customer._id)}>Delete</Button></td>
                             </tr>
                         )
                     })}
@@ -42,8 +54,4 @@ function AdminViewUser() {
             </Table>
         </>
     )
-
 }
-
-
-export default AdminViewUser
