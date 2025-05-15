@@ -22,3 +22,5 @@ const cartSchema = new mongoose.Schema({
     }
 }, { timestamps: true })
 const Cart = mongoose.model("cart_tbl", cartSchema)
+
+module.exports = Cart

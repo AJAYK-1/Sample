@@ -3,18 +3,18 @@ import AXIOS from 'axios'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Col, Container, Row } from 'react-bootstrap'
-import Navbaruser from './userNavbar';
 import { jwtDecode } from 'jwt-decode'
+import UserNavbar from './usernavbar';
 
 
 export default function Userhome() {
   const [product, setProduct] = useState([])
   const token = localStorage.getItem('token')
-  // console.log(jwtDecode(token))
+  console.log(jwtDecode(token))
   const decode = jwtDecode(token)
   const userId = decode.id
   useEffect(() => {
-    AXIOS.get('http://localhost:9000/api/user/getProducts')
+    AXIOS.get('http://localhost:9000/api/user/getproducts')
       .then((res) => {
         console.log(res.data)
         setProduct(res.data)
@@ -42,7 +42,7 @@ export default function Userhome() {
 
   return (
     <>
-      <Navbaruser />
+      <UserNavbar />
       <Container>
         <Row>
           {

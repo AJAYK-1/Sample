@@ -29,10 +29,10 @@ function AddProduct() {
         e.preventDefault()
         const formdata = new FormData()
 
-        formdata.append("productName", product.productname)
-        formdata.append("productPrice", product.productprice)
-        formdata.append("productDescription", product.productdesc)
-        formdata.append("productQuantity", product.productquantity)
+        formdata.append("productName", Product.productname)
+        formdata.append("productPrice", Product.productprice)
+        formdata.append("productDescription", Product.productdesc)
+        formdata.append("productQuantity", Product.productquantity)
 
         if (Image) {
             formdata.append("Image", Image)

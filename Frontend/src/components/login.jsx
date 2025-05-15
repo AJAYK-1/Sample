@@ -37,6 +37,7 @@ export default function LoginPage() {
                 .then((res) => {
                     console.log(res.data)
                     alert("Login successful")
+                    localStorage.setItem("token",res.data.token)
                     setRecord({ email: "", password: "" }) // Reset form
                 }).catch((err) => {
                     console.log(err)

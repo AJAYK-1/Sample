@@ -68,23 +68,56 @@ const addCart = async (req, res) => {
 }
 
 
-const createOrder = async(req,res) => {
+const fetchCartById = async (req, res) => {
     try {
-        const userId= req.headers.id
-        const {cartId,totalAmount,payment,address} = req.body
-        const order = await order({
-            userId,
-            cartId,
-            totalAmount,
-            payment,
-            address
-        })
-        await orders.save()
-        res.json("Order successfull")
+        const userId = req.headers.id;
+        const cartItems = await Cart.findOne({ userId }).populate('product.productId')
+        res.json(cartItems)
     } catch (err) {
         console.log(err)
     }
 }
 
 
-module.exports = { registerUser, loginuser, viewproducts, addCart }
+const createOrder = async (req, res) => {
+    try {
+        const userId = req.headers.id
+        const { cartId, totalAmount, payment, address } = req.body
+        const order = await order({
+            userId,
+            cartId,
+            totalAmount,
+            payment,
+            address,
+            status: "Order Placed"
+        })
+        await orders.save()
+        const cartItem = await Cart.findOne({ _id: cartId })
+        cartItem.status = "Ordered"
+        cartItem.save()
+        res.json({ message: "Order successfull", status: 200 })
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
+const viewOrder=async(req,res)=>{
+    try{
+         const userId=req.headers.id
+         const orders=await Order.findOne({userId}).populate({
+          path:"cartId",
+          populate:{
+             path:"product.productId"
+          },
+         })
+         console.log(orders)
+         res.json(orders)
+    }catch(err){
+       console.log(err)
+    }
+ }
+ 
+
+
+module.exports = { registerUser, loginuser, viewproducts, addCart, createOrder, fetchCartById,viewOrder }

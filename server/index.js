@@ -17,6 +17,7 @@ app.use('/api/user', userRouter)
 const adminRouter = require('./routes/adminRoutes')
 app.use('/api/admin',adminRouter)
 
+app.use('/uploads',express.static('uploads'))
 
 app.listen(9000, () => {
     console.log("Server Started Successfully...")

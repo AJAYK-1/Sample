@@ -9,6 +9,10 @@ import AdminViewUser from './components/admin/adminviewuser'
 import AdminHome from './components/admin/adminhome'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddProduct from './components/admin/adminaddpro'
+import Userhome from './components/user/userhome'
+import LoginPage from './components/login'
+import Orderpage from './components/user/orderpage'
+import Cartpage from './components/user/cartpage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +25,10 @@ function App() {
           <Route path='/adminviewuser' element={<AdminViewUser />} />
           <Route path='/adminlogin' element={<AdminLogin />} />
           <Route path='/adminaddpro' element={<AddProduct />} />
+          <Route path='/' element={<LoginPage />} />
+          <Route path='/userhome' element={<Userhome />} />
+          <Route path='/orderpage' element={<Orderpage />} />
+          <Route path='/cartpage' element={<Cartpage />} />
         </Routes>
       </BrowserRouter>
     </>
