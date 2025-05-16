@@ -14,6 +14,8 @@ function AdminNavbar() {
                         <Nav.Link href="/adminlogin">Login</Nav.Link>
                         <Nav.Link href="/adminviewuser">View User</Nav.Link>
                         <Nav.Link href="/adminaddpro">Add Product</Nav.Link>
+                        {/* <Nav.Link href="/register">Register</Nav.Link> */}
+                        <Nav.Link href="/adminviewproducts">View Product</Nav.Link>
 
                     </Nav>
                 </Container>

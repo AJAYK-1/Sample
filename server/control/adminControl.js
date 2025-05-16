@@ -26,6 +26,7 @@ const deleteUser = async (req, res) => {
 const addProducts = async (req, res) => {
     try {
         const { productName, productDescription, productPrice, productQuantity } = req.body
+        console.log(req.file)
         const image = req.file.filename
         const products = await Product({
             productName,

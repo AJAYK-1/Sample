@@ -5,6 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import AXIOS from 'axios'
 import React, { useState } from 'react';
+import AdminNavbar from './adminnavbar';
 
 
 function AddProduct() {
@@ -15,10 +16,10 @@ function AddProduct() {
         productquantity: ""
     })
 
-    const [image, setImage] = useState(null)
+    const [Image, setImage] = useState(null)
 
     const handleChange = (e) => {
-        setProduct({ ...product, [e.target.name]: e.target.value })
+        setProduct({ ...Product, [e.target.name]: e.target.value })
     }
 
     const handleImage = (e) => {
@@ -29,10 +30,10 @@ function AddProduct() {
         e.preventDefault()
         const formdata = new FormData()
 
-        formdata.append("productName", Product.productname)
-        formdata.append("productPrice", Product.productprice)
-        formdata.append("productDescription", Product.productdesc)
-        formdata.append("productQuantity", Product.productquantity)
+        formdata.append("productName", Product.productName)
+        formdata.append("productPrice", Product.productPrice)
+        formdata.append("productDescription", Product.productDescription)
+        formdata.append("productQuantity", Product.productQuantity)
 
         if (Image) {
             formdata.append("Image", Image)
@@ -41,7 +42,7 @@ function AddProduct() {
         AXIOS.post("http://localhost:9000/api/admin/adminaddproduct", formdata, {
             headers: { "Content-Type": "multipart/formdata" }
         }).then((res) => {
-            alert(res.data)
+            alert(res.data.message)
         }).catch((err) => {
             console.log(err)
         })
@@ -50,6 +51,7 @@ function AddProduct() {
 
     return (
         <>
+            <AdminNavbar />
             <h1>Add Product</h1>
             <Form noValidate onSubmit={handleSubmit}>
                 <Row className="mb-3">
@@ -94,7 +96,7 @@ function AddProduct() {
                         <Form.Label>Description</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="productDescription"
+                            // placeholder="Product Description"
                             name="productDescription"
                             onChange={handleChange}
                         />
@@ -112,7 +114,7 @@ function AddProduct() {
                         <Form.Label>Quantity</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="productQuantity"
+                            // placeholder="Product Quantity"
                             name="productQuantity"
                             onChange={handleChange}
                         />

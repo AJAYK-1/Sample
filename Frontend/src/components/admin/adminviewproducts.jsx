@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import AXIOS from 'axios'
-import Navbaradmin from './navbar'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
+import AdminNavbar from './adminnavbar';
+
+
 export default function AdminViewProducts() {
-    const [product, setProduct] = useState([])
+    const [Product, setProduct] = useState([])
     useEffect(() => {
-        AXIOS.get('http://localhost:9000/api/admin/viewproducts')
+        AXIOS.get('http://localhost:9000/api/admin/adminviewproducts')
             .then((res) => {
                 console.log(res.data)
                 setProduct(res.data)
@@ -21,7 +23,7 @@ export default function AdminViewProducts() {
     }
     return (
         <>
-            <Navbaradmin />
+            <AdminNavbar />
             <h1>Available Products</h1>
             <Table striped bordered hover>
                 <thead>
@@ -35,7 +37,7 @@ export default function AdminViewProducts() {
                     </tr>
                 </thead>
                 <tbody>
-                    {product.map((fruits, index) => {
+                    {Product.map((fruits, index) => {
                         return (
                             <tr key={fruits._id}>
                                 <td>{index + 1}</td>

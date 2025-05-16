@@ -44,8 +44,8 @@ export default function Adminviewuser() {
                         return (
                             <tr key={customer._id}>
                                 <td>{index + 1}</td>
-                                <td>{customer.Username}</td>
-                                <td>{customer.Email}</td>
+                                <td>{customer.username}</td>
+                                <td>{customer.email}</td>
                                 <td><Button variant="danger" onClick={() => deleteUser(customer._id)}>Delete</Button></td>
                             </tr>
                         )
