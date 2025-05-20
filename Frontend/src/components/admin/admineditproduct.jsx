@@ -6,13 +6,20 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import AXIOS from 'axios'
 import { useParams } from 'react-router-dom';
+import AdminNavbar from './adminnavbar';
+
 
 export default function Admineditproduct() {
     const params = useParams()
     console.log("productid:", params.id)
-    const [product, setProduct] = useState({})
+    const [product, setProduct] = useState({
+        productName: '',
+        productDescription: '',
+        productPrice: '',
+        productQuantity: ''
+    })
     useEffect(() => {
-        AXIOS.get('http://localhost:9000/api/admin/editproduct', { headers: { id: params.id } })
+        AXIOS.get(`http://localhost:9000/api/admin/admineditproduct/${params.id}`, { headers: { id: params.id } })
             .then((res) => {
                 console.log(res.data)
                 setProduct(res.data)
@@ -40,7 +47,7 @@ export default function Admineditproduct() {
         if (Image) {
             formdata.append("Image", Image)
         }
-        AXIOS.put(`http://localhost:9000/api/admin/updateproduct/${ params.id }`, formdata, {
+        AXIOS.put(`http://localhost:9000/api/admin/updateproduct/${params.id}`, formdata, {
             headers: {
                 "Content-Type": "multipart/formdata"
             }
@@ -52,6 +59,7 @@ export default function Admineditproduct() {
     }
     return (
         <>
+            <AdminNavbar />
             <h1>Edit Product</h1>
             <Form noValidate onSubmit={handleSubmit}>
                 <Row className="mb-3">
@@ -68,7 +76,7 @@ export default function Admineditproduct() {
                             value={product.productName}
                             onChange={handleChange}
                         />
-                        <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                        {/* <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback> */}
                     </Form.Group>
                     <Form.Group
                         as={Col}
@@ -84,7 +92,7 @@ export default function Admineditproduct() {
                             onChange={handleChange}
                         />
 
-                        <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                        {/* <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback> */}
                     </Form.Group>
 
                 </Row>

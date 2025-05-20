@@ -14,6 +14,8 @@ import LoginPage from './components/login'
 import Orderpage from './components/user/orderpage'
 import Cartpage from './components/user/cartpage'
 import AdminViewProducts from './components/admin/adminviewproducts'
+import Admineditproduct from './components/admin/admineditproduct'
+import Commonhome from './components/commonhome'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,12 +24,17 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<AdminLogin />} />
+          <Route path='/' element={<Commonhome />} />
+          <Route path='/adminlogin' element={<AdminLogin />} />
           <Route path='/adminviewuser' element={<AdminViewUser />} />
           <Route path='/adminhome' element={<AdminHome />} />
           <Route path='/adminaddpro' element={<AddProduct />} />
           <Route path='/adminviewproducts' element={<AdminViewProducts />} />
-          <Route path='/' element={<Registerpage />} />
+          <Route path='/admineditproduct/:id' element={<Admineditproduct />} />
+
+
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/register' element={<Registerpage />} />
           <Route path='/userhome' element={<Userhome />} />
           <Route path='/orderpage' element={<Orderpage />} />
           <Route path='/cartpage' element={<Cartpage />} />

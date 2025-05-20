@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import AXIOS from 'axios'
+import HomeNavbar from './homenavbar'
+import { useNavigate } from 'react-router-dom'
 
 export default function LoginPage() {
     const [record, setRecord] = useState({
@@ -30,6 +32,8 @@ export default function LoginPage() {
         return Object.keys(newErrors).length === 0
     }
 
+    const navigate = useNavigate()
+
     const handleSubmit = (e) => {
         e.preventDefault()
         if (validate()) {
@@ -37,8 +41,9 @@ export default function LoginPage() {
                 .then((res) => {
                     console.log(res.data)
                     alert("Login successful")
-                    localStorage.setItem("token",res.data.token)
+                    localStorage.setItem("token", res.data.token)
                     setRecord({ email: "", password: "" }) // Reset form
+                    navigate("/userhome")
                 }).catch((err) => {
                     console.log(err)
                     alert("Login failed")
@@ -48,30 +53,33 @@ export default function LoginPage() {
 
     return (
         <>
-            <h1>Login Page</h1>
-            <form onSubmit={handleSubmit}>
-                <p>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder='Enter your email'
-                        onChange={handleChange}
-                        value={record.email}
-                    />
-                    {errors.email && <span style={{ color: 'red' }}>{errors.email}</span>}
-                </p>
-                <p>
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder='Enter your password'
-                        onChange={handleChange}
-                        value={record.password}
-                    />
-                    {errors.password && <span style={{ color: 'red' }}>{errors.password}</span>}
-                </p>
-                <p><input type="submit" value="Login" /></p>
-            </form>
+            <HomeNavbar />
+            <center>
+                <h1>Login Page</h1>
+                <form onSubmit={handleSubmit}>
+                    <p>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder='Enter your email'
+                            onChange={handleChange}
+                            value={record.email}
+                        />
+                        {errors.email && <span style={{ color: 'red' }}>{errors.email}</span>}
+                    </p>
+                    <p>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder='Enter your password'
+                            onChange={handleChange}
+                            value={record.password}
+                        />
+                        {errors.password && <span style={{ color: 'red' }}>{errors.password}</span>}
+                    </p>
+                    <p><input type="submit" value="Login" /></p>
+                </form>
+            </center>
         </>
     )
 }

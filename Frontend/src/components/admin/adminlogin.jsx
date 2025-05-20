@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
-import AdminNavbar from './adminnavbar';
+import HomeNavbar from '../homenavbar';
 
 
 function AdminLogin() {
@@ -28,7 +28,7 @@ function AdminLogin() {
     }
     return (
         <>
-            <AdminNavbar />
+            <HomeNavbar />
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>

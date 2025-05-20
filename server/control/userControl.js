@@ -1,4 +1,7 @@
+const Product = require('../model/productModel')
 const User = require('../model/userModel')
+const jwt = require('jsonwebtoken')
+
 
 const registerUser = async (req, res) => {
     try {
@@ -19,7 +22,20 @@ const registerUser = async (req, res) => {
 const loginuser = async (req, res) => {
     try {
         const { email, password } = req.body
-        const loguser = await User.findOne({ Email: email })
+        const loguser = await User.findOne({ email: email })
+        console.log(loguser)
+        if (loguser) {
+            if (loguser.password == password) {
+                //payload,secretkey,expiring time
+                const token = jwt.sign({ id: loguser._id }, "jwtsecretkey123", { expiresIn: "1hr" })
+                res.json({ msg: "User Login Successfully", status: 200, token });
+            } else {
+                res.json({ msg: "Invalid Credentials", status: 400 });
+            }
+        } else {
+            res.json({ msg: "User Not Found!", status: 400 });
+        }
+
     } catch (err) {
         console.log(err)
     }

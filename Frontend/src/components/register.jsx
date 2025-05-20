@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import AXIOS from 'axios'
+import HomeNavbar from './homenavbar'
 
 export default function Registerpage() {
     const [record, setRecord] = useState({
@@ -55,6 +56,8 @@ export default function Registerpage() {
 
     return (
         <>
+            <HomeNavbar />
+            <center>
             <h1>Registration Page</h1>
             <form onSubmit={handleSubmit}>
                 <p>
@@ -88,7 +91,7 @@ export default function Registerpage() {
                     {errors.password && <span style={{ color: 'red' }}>{errors.password}</span>}
                 </p>
                 <p><input type="submit" value={"Register"} /></p>
-            </form>
+            </form></center>
         </>
     )
 }

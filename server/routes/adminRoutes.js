@@ -1,5 +1,5 @@
 const express = require('express')
-const { viewuser, deleteUser, addProducts, updateProductbyId, viewproduct } = require('../control/adminControl')
+const { viewuser, deleteUser, addProducts, updateProductbyId, viewproduct, viewproductbyid } = require('../control/adminControl')
 const multer=require('multer')
 
 const adminRouter = express.Router()
@@ -22,6 +22,7 @@ adminRouter.post("/adminaddproduct", uploads.single('Image'), addProducts)
 adminRouter.get("/adminviewusers", viewuser)
 adminRouter.put("/updateproduct/:id", uploads.single('Image'), updateProductbyId)
 adminRouter.get("/adminviewproducts",viewproduct)
+adminRouter.get("/admineditproduct/:id",viewproductbyid)
 
 
 module.exports = adminRouter
